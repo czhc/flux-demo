@@ -38,12 +38,15 @@ class TodoStore extends EventEmitter {
       case 'CREATE_TODO': {
         this.createTodo(action.text);
       }
+      case 'RECEIVE_TODOS': {
+        this.todos = action.todos
+        this.emit('change')
+      }
     }
   }
 }
 
 const todoStore = new TodoStore;
-
 dispatcher.register(todoStore.handleActions.bind(todoStore));
 
 export default todoStore;
